@@ -23,4 +23,6 @@ public class ToDo {
     @Column(unique = true, nullable = false)
     private String task;
 
+    @Column(nullable = false)
+    private boolean complete;
 }
