@@ -22,6 +22,7 @@ import lombok.NoArgsConstructor;
 @Entity
 
 public class ToDoList {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -29,9 +30,9 @@ public class ToDoList {
 	@NotNull
 	private String groupName;
 	
-	@OneToMany(mappedBy = "toDo", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "toDoList", fetch = FetchType.EAGER)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-    private List<ToDo> toDoTasks;
+    private List<ToDo> toDoTask;
 	
 
 }

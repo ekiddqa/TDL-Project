@@ -45,13 +45,13 @@ public class ToDoListService {
 
 
 	public ToDoListDTO readById(Long id) {
-		return this.mapToDTO(this.repo.findById(id).orElseThrow(ToDoListNotFoundException::new));
+		return this.mapToDTO(this.repo.findById(id).orElseThrow());
 	}
 
 
 	public ToDoListDTO update(ToDoListDTO toDoListDTO, Long id) {
 		
-		ToDoList toUpdate = this.repo.findById(id).orElseThrow(ToDoListNotFoundException::new);	
+		ToDoList toUpdate = this.repo.findById(id).orElseThrow();	
 		toUpdate.setName(toDoListDTO.getGroupName());	
 		SpringBean.mergeNotNull(toDoListDTO, toUpdate);
 		return this.mapToDTO(this.repo.save(toUpdate));
