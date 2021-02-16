@@ -30,15 +30,13 @@ public class ToDoService {
 		this.repo = repo;
 		this.mapper = mapper;
 	}
-
-	
 	
 
 	 public ToDoDTO create(ToDo todo) { 
-	 return this.mapToDTO(this.repo.save(todo)); }
+	    return this.mapToDTO(this.repo.save(todo)); }
 
 	
-     public List<ToDoDTO> readllAll() {
+     public List<ToDoDTO> readAll() {
 		return this.repo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
 
 }

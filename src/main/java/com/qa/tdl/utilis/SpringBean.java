@@ -17,12 +17,15 @@ public class SpringBean {
 	}
 	
 	private static String[] getNullPropName(Object src) {
+		
 		final BeanWrapper wrappedSrObj = new BeanWrapperImpl(src);
 		Set<String> propName = new HashSet<>();
+		
 		for(PropertyDescriptor descriptor: wrappedSrObj.getPropertyDescriptors()) {
 			if(wrappedSrObj.getPropertyValue(descriptor.getName()) == null)
 				propName.add(descriptor.getName());
 		}
+		
 		return propName.toArray(new String[propName.size()]);
 	}
 
