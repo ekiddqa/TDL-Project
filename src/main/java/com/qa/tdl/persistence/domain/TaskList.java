@@ -13,15 +13,17 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 
-public class ToDoList {
+public class TaskList {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,9 +32,9 @@ public class ToDoList {
 	@NotNull
 	private String groupName;
 	
-	@OneToMany(mappedBy = "toDoList", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "taskList", fetch = FetchType.EAGER)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-    private List<ToDo> toDoTask;
+    private List<ToDo> toDoTasks;
 	
 
 }

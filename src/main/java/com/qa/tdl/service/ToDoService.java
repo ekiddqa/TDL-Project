@@ -46,11 +46,11 @@ public class ToDoService {
 	}
 
 
-	public ToDoDTO update(ToDoDTO ToDoDto, Long id) {
+	public ToDoDTO update(ToDoDTO toDoDTO, Long id) {
 		
 		ToDo toUpdate = this.repo.findById(id).orElseThrow();
-		toUpdate.setTask(ToDoDto.getTask());
-		SpringBean.mergeNotNull(ToDoDto, toUpdate);
+		toUpdate.setTask(toDoDTO.getTask());
+		SpringBean.mergeNotNull(toDoDTO, toUpdate);
 		return this.mapToDTO(this.repo.save(toUpdate));
 	}
 

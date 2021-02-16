@@ -8,12 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class ToDo {
 
@@ -29,6 +31,6 @@ public class ToDo {
     
 	
     @ManyToOne
-    private ToDoList toDoList = null;
+    private TaskList taskList = null;
 	 
 }

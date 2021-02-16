@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 
-public class ToDoListDTO {
+public class TaskListDTO {
 	
 	private Long id;
 	private String groupName;

@@ -7,53 +7,53 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.qa.tdl.dto.ToDoListDTO;
-import com.qa.tdl.persistence.domain.ToDoList;
-import com.qa.tdl.persistence.repo.ToDoListRepo;
+import com.qa.tdl.dto.TaskListDTO;
+import com.qa.tdl.persistence.domain.TaskList;
+import com.qa.tdl.persistence.repo.TaskListRepo;
 import com.qa.tdl.utilis.SpringBean;
 
 @Service
-public class ToDoListService {
+public class TaskListService {
 
 	//Access to repo - Interfaces
-	private ToDoListRepo repo;
+	private TaskListRepo repo;
 
 	//Maps to DTO/domain
 	private ModelMapper mapper;
 
-	private ToDoListDTO mapToDTO(ToDoList toDoList) {
-		return this.mapper.map(toDoList, ToDoListDTO.class);
+	private TaskListDTO mapToDTO(TaskList taskList) {
+		return this.mapper.map(taskList, TaskListDTO.class);
 	}
 
 	@Autowired
-	public ToDoListService(ToDoListRepo repo, ModelMapper mapper) {
+	public TaskListService(TaskListRepo repo, ModelMapper mapper) {
 		super();
 		this.repo = repo;
 		this.mapper = mapper;
 	}
 
 
-	public ToDoListDTO create(ToDoList toDoList) {
-		return this.mapToDTO(this.repo.save(toDoList));
+	public TaskListDTO create(TaskList taskList) {
+		return this.mapToDTO(this.repo.save(taskList));
 	}
 
 
-	public List<ToDoListDTO> readAll() {
+	public List<TaskListDTO> readAll() {
 		return this.repo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
 		
 	}
 
 
-	public ToDoListDTO readById(Long id) {
+	public TaskListDTO readById(Long id) {
 		return this.mapToDTO(this.repo.findById(id).orElseThrow());
 	}
 
 
-	public ToDoListDTO update(ToDoListDTO toDoListDTO, Long id) {
+	public TaskListDTO update(TaskListDTO taskListDTO, Long id) {
 		
-		ToDoList toUpdate = this.repo.findById(id).orElseThrow();	
-		toUpdate.setName(toDoListDTO.getGroupName());	
-		SpringBean.mergeNotNull(toDoListDTO, toUpdate);
+		TaskList toUpdate = this.repo.findById(id).orElseThrow();	
+		toUpdate.setGroupName(taskListDTO.getGroupName());	
+		SpringBean.mergeNotNull(taskListDTO, toUpdate);
 		return this.mapToDTO(this.repo.save(toUpdate));
 		}
 
