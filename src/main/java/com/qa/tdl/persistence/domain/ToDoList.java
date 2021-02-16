@@ -29,9 +29,9 @@ public class ToDoList {
 	@NotNull
 	private String groupName;
 	
-//	@OneToMany(mappedBy = "toDo", fetch = FetchType.EAGER)
-//	@OnDelete(action = OnDeleteAction.CASCADE)
-//	private List<ToDo> toDoTasks;
+	@OneToMany(mappedBy = "toDo", fetch = FetchType.EAGER)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+    private List<ToDo> toDoTasks;
 	
 
 }
