@@ -5,7 +5,7 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "Task does not exist with that ID")
+@ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "Group does not exist with that ID")
 public class TaskListNotFoundException  extends EntityNotFoundException{
 
 	/**
