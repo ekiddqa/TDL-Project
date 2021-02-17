@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qa.tdl.dto.TaskListDTO;
+import com.qa.tdl.exception.TaskListNotFoundException;
 import com.qa.tdl.persistence.domain.TaskList;
 import com.qa.tdl.persistence.repo.TaskListRepo;
 import com.qa.tdl.utilis.SpringBean;
@@ -45,13 +46,13 @@ public class TaskListService {
 
 
 	public TaskListDTO readById(Long id) {
-		return this.mapToDTO(this.repo.findById(id).orElseThrow());
+		return this.mapToDTO(this.repo.findById(id).orElseThrow(TaskListNotFoundException::new));
 	}
 
 
 	public TaskListDTO update(TaskListDTO taskListDTO, Long id) {
 		
-		TaskList toUpdate = this.repo.findById(id).orElseThrow();	
+		TaskList toUpdate = this.repo.findById(id).orElseThrow(TaskListNotFoundException::new);	
 		toUpdate.setGroupName(taskListDTO.getGroupName());	
 		SpringBean.mergeNotNull(taskListDTO, toUpdate);
 		return this.mapToDTO(this.repo.save(toUpdate));
