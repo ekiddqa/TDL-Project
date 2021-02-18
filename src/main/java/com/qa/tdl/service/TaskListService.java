@@ -50,7 +50,7 @@ public class TaskListService {
 	}
 
 
-	public TaskListDTO update(TaskListDTO taskListDTO, Long id) {
+	public TaskListDTO update(Long id, TaskListDTO taskListDTO) {
 		
 		TaskList toUpdate = this.repo.findById(id).orElseThrow(TaskListNotFoundException::new);	
 		toUpdate.setGroupName(taskListDTO.getGroupName());	

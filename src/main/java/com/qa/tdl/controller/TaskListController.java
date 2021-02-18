@@ -23,7 +23,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/toDoList")
+@RequestMapping("/TaskList")
 public class TaskListController {
 	
 	private TaskListService service;

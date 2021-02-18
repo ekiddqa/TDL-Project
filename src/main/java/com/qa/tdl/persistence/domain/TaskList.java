@@ -20,11 +20,12 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 
 public class TaskList {
 	
+	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -35,6 +36,18 @@ public class TaskList {
 	@OneToMany(mappedBy = "taskList", fetch = FetchType.EAGER)
 	@OnDelete(action = OnDeleteAction.CASCADE)
     private List<ToDo> toDoTasks;
-	
+
+	public TaskList(@NotNull String groupName, List<ToDo> toDoTasks) {
+		super();
+		this.groupName = groupName;
+		this.toDoTasks = toDoTasks;
+	}
+
+	public TaskList(Long id, @NotNull String groupName, List<ToDo> toDoTasks) {
+		super();
+		this.id = id;
+		this.groupName = groupName;
+		this.toDoTasks = toDoTasks;
+	}
 
 }

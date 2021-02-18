@@ -47,7 +47,7 @@ public class ToDoService {
 	}
 
 
-	public ToDoDTO update(ToDoDTO toDoDTO, Long id) {
+	public ToDoDTO update(Long id, ToDoDTO toDoDTO) {
 		
 		ToDo toUpdate = this.repo.findById(id).orElseThrow(ToDoNotFoundException::new);
 		toUpdate.setTask(toDoDTO.getTask());
