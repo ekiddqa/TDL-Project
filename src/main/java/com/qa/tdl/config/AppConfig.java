@@ -9,7 +9,6 @@ import org.modelmapper.ModelMapper;
 public class AppConfig {
 
 	@Bean
-	@Scope("prototype")
 	public ModelMapper mapper() {
 		return new ModelMapper();
 	}

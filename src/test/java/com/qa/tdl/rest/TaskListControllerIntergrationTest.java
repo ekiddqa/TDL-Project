@@ -4,8 +4,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,14 +38,13 @@ public class TaskListControllerIntergrationTest {
 	@Autowired
 	private ObjectMapper jsonifier;
 
-	@Autowired
-	private ModelMapper mapper;
+	private ModelMapper mapper = new ModelMapper();
 
 	private TaskListDTO mapToDTO(TaskList taskList) {
 		return this.mapper.map(taskList, TaskListDTO.class);
 	}
 
-	private final TaskList TEST_TaskList_1 = new TaskList(1L, "Chores", null);
+	private final TaskList TEST_TaskList_1 = new TaskList(1L, "Chores", new ArrayList<>());
 	private final TaskList TEST_TaskList_2 = new TaskList(2L, "Admin", null);
 
 
@@ -51,25 +52,25 @@ public class TaskListControllerIntergrationTest {
 
 	private final String URI = "/TaskList";
 
-	@Test
-	void createTest() throws Exception {
-		TaskListDTO testDTO = mapToDTO(new TaskList());
-		String testDTOAsJSON = this.jsonifier.writeValueAsString(testDTO);
-
-
-		RequestBuilder request = post(URI + "/create").contentType(MediaType.APPLICATION_JSON).content(testDTOAsJSON);
-
-		ResultMatcher checkStatus = status().isCreated();
-
-		TaskListDTO testSavedDTO = mapToDTO(TEST_TaskList_1);
-
-		testSavedDTO.setId(5L);
-		String TestSavedDTOAsJson = this.jsonifier.writeValueAsString(testSavedDTO);
-
-		ResultMatcher checkBody = content().json(TestSavedDTOAsJson);
-
-		this.mvc.perform(request).andExpect(checkStatus).andExpect(checkBody);
-
-	}
+	
+	 @Test
+	    public void createIntegrationTest() throws Exception {
+	        
+	        // RESOURCES
+	        TaskListDTO testSavedDTO = mapToDTO(TEST_TaskList_1); 
+	        String TestSavedDTOAsJson = this.jsonifier.writeValueAsString(testSavedDTO); //response string
+	        
+	        // ACTIONS
+	        RequestBuilder request = post(URI + "/create")
+	        		.contentType(MediaType.APPLICATION_JSON)
+	        		.content(this.jsonifier.writeValueAsString(TEST_TaskList_1));
+	        
+	        // ASSERTIONS
+	        ResultMatcher checkStatus = status().isCreated();
+	        ResultMatcher checkBody = content().json(TestSavedDTOAsJson);
+	        
+	        //checkbody = 
+	        this.mvc.perform(request).andExpect(checkStatus).andExpect(checkBody);
+	    }
 
 }

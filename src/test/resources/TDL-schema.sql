@@ -1,5 +1,5 @@
-drop table if exists TO_DO CASCADE;
 drop table if exists TASK_LIST CASCADE;
+drop table if exists TO_DO CASCADE;
  
  create table if not exists TASK_LIST (
     ID bigint AUTO_INCREMENT,
