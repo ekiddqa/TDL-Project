@@ -72,5 +72,24 @@ public class TaskListControllerIntergrationTest {
 	        //checkbody = 
 	        this.mvc.perform(request).andExpect(checkStatus).andExpect(checkBody);
 	    }
-
+	 
+	 @Test
+	    public void createIntegrationTest() throws Exception {
+	        
+	        // RESOURCES
+	        TaskListDTO testSavedDTO = mapToDTO(TEST_TaskList_1); 
+	        String TestSavedDTOAsJson = this.jsonifier.writeValueAsString(testSavedDTO); //response string
+	        
+	        // ACTIONS
+	        RequestBuilder request = post(URI + "/create")
+	        		.contentType(MediaType.APPLICATION_JSON)
+	        		.content(this.jsonifier.writeValueAsString(TEST_TaskList_1));
+	        
+	        // ASSERTIONS
+	        ResultMatcher checkStatus = status().isCreated();
+	        ResultMatcher checkBody = content().json(TestSavedDTOAsJson);
+	        
+	        //checkbody = 
+	        this.mvc.perform(request).andExpect(checkStatus).andExpect(checkBody);
+	    }
 }
