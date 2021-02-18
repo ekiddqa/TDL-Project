@@ -1,5 +1,6 @@
 package com.qa.tdl.rest;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -74,22 +75,35 @@ public class TaskListControllerIntergrationTest {
 	    }
 	 
 	 @Test
-	    public void createIntegrationTest() throws Exception {
+	    public void readAllIntegrationTest() throws Exception {
 	        
-	        // RESOURCES
-	        TaskListDTO testSavedDTO = mapToDTO(TEST_TaskList_1); 
-	        String TestSavedDTOAsJson = this.jsonifier.writeValueAsString(testSavedDTO); //response string
+	        List<TaskListDTO> testSavedListDTO = List.of(mapToDTO(TEST_TaskList_1), mapToDTO(TEST_TaskList_2)); 
 	        
-	        // ACTIONS
-	        RequestBuilder request = post(URI + "/create")
+	        String testSavedListDTOAsJson = this.jsonifier.writeValueAsString(testSavedListDTO); //response string
+	        
+	        RequestBuilder request = get(URI + "/read")
 	        		.contentType(MediaType.APPLICATION_JSON)
-	        		.content(this.jsonifier.writeValueAsString(TEST_TaskList_1));
+	        		.content(this.jsonifier.writeValueAsString(testSavedListDTO));
+	         
+	        ResultMatcher checkStatus = status().isOk();
+	        ResultMatcher checkBody = content().json(testSavedListDTOAsJson);
 	        
-	        // ASSERTIONS
-	        ResultMatcher checkStatus = status().isCreated();
+	        this.mvc.perform(request).andExpect(checkStatus).andExpect(checkBody);
+	    }
+	 
+	 @Test
+	    public void readByIdIntegrationTest() throws Exception {
+
+		 TaskListDTO testSavedDTO = mapToDTO(TEST_TaskList_2);    
+		 String TestSavedDTOAsJson = this.jsonifier.writeValueAsString(testSavedDTO); //response string
+	        
+	        RequestBuilder request = get(URI + "/read/2")
+	        		.contentType(MediaType.APPLICATION_JSON)
+	        		.content(this.jsonifier.writeValueAsString(testSavedDTO));
+	         
+	        ResultMatcher checkStatus = status().isOk();
 	        ResultMatcher checkBody = content().json(TestSavedDTOAsJson);
 	        
-	        //checkbody = 
 	        this.mvc.perform(request).andExpect(checkStatus).andExpect(checkBody);
 	    }
 }
