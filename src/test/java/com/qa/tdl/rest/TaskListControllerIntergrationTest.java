@@ -47,18 +47,16 @@ public class TaskListControllerIntergrationTest {
 	private TaskListDTO mapToDTO(TaskList taskList) {
 		return this.mapper.map(taskList, TaskListDTO.class);
 	}
-
-
-
 	
 	private final ToDo TEST_TASK_1 = new ToDo(1L, "Laundry", false, null);
 	private final ToDo TEST_TASK_2 = new ToDo(2L, "Grocery Shopping", true, null);
 	private final ToDo TEST_TASK_3 = new ToDo(3L, "Tidy house", false, null);
-
+	private final ToDo TEST_TASK_4 = new ToDo(4L, "Reorganise bills into alphabetical statments", true, null);
 	List<ToDo> choresList = List.of(TEST_TASK_1, TEST_TASK_2, TEST_TASK_3);
+	List<ToDo> adminList = List.of(TEST_TASK_4);
 	
 	private final TaskList TEST_LIST_1 = new TaskList(1L, "Chores", choresList);
-	private final TaskList TEST_LIST_2 = new TaskList(2L, "Admin", null);
+	private final TaskList TEST_LIST_2 = new TaskList(2L, "Admin", adminList);
 	
 	private final List<TaskList> LISTOFTASKLISTS = List.of(TEST_LIST_1, TEST_LIST_2);
 
