@@ -1,7 +1,9 @@
 package com.qa.tdl.rest;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -25,6 +27,7 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.tdl.dto.TaskListDTO;
 import com.qa.tdl.persistence.domain.TaskList;
+import com.qa.tdl.persistence.domain.ToDo;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -45,11 +48,19 @@ public class TaskListControllerIntergrationTest {
 		return this.mapper.map(taskList, TaskListDTO.class);
 	}
 
-	private final TaskList TEST_TaskList_1 = new TaskList(1L, "Chores", new ArrayList<>());
-	private final TaskList TEST_TaskList_2 = new TaskList(2L, "Admin", null);
 
 
-	private final List<TaskList> LISTOFTASKLISTS = List.of(TEST_TaskList_1, TEST_TaskList_2);
+	
+	private final ToDo TEST_TASK_1 = new ToDo(1L, "Laundry", false, null);
+	private final ToDo TEST_TASK_2 = new ToDo(2L, "Grocery Shopping", true, null);
+	private final ToDo TEST_TASK_3 = new ToDo(3L, "Tidy house", false, null);
+
+	List<ToDo> choresList = List.of(TEST_TASK_1, TEST_TASK_2, TEST_TASK_3);
+	
+	private final TaskList TEST_LIST_1 = new TaskList(1L, "Chores", choresList);
+	private final TaskList TEST_LIST_2 = new TaskList(2L, "Admin", null);
+	
+	private final List<TaskList> LISTOFTASKLISTS = List.of(TEST_LIST_1, TEST_LIST_2);
 
 	private final String URI = "/TaskList";
 
@@ -58,13 +69,13 @@ public class TaskListControllerIntergrationTest {
 	    public void createIntegrationTest() throws Exception {
 	        
 	        // RESOURCES
-	        TaskListDTO testSavedDTO = mapToDTO(TEST_TaskList_1); 
+	        TaskListDTO testSavedDTO = mapToDTO(TEST_LIST_1); 
 	        String TestSavedDTOAsJson = this.jsonifier.writeValueAsString(testSavedDTO); //response string
 	        
 	        // ACTIONS
 	        RequestBuilder request = post(URI + "/create")
 	        		.contentType(MediaType.APPLICATION_JSON)
-	        		.content(this.jsonifier.writeValueAsString(TEST_TaskList_1));
+	        		.content(this.jsonifier.writeValueAsString(TEST_LIST_1));
 	        
 	        // ASSERTIONS
 	        ResultMatcher checkStatus = status().isCreated();
@@ -77,16 +88,16 @@ public class TaskListControllerIntergrationTest {
 	 @Test
 	    public void readAllIntegrationTest() throws Exception {
 	        
-	        List<TaskListDTO> testSavedListDTO = List.of(mapToDTO(TEST_TaskList_1), mapToDTO(TEST_TaskList_2)); 
+	        List<TaskListDTO> testSavedListDTO = List.of(mapToDTO(TEST_LIST_1), mapToDTO(TEST_LIST_2)); 
 	        
-	        String testSavedListDTOAsJson = this.jsonifier.writeValueAsString(testSavedListDTO); //response string
+	        String testSavedListAsJson = this.jsonifier.writeValueAsString(LISTOFTASKLISTS); //response string
 	        
 	        RequestBuilder request = get(URI + "/read")
 	        		.contentType(MediaType.APPLICATION_JSON)
 	        		.content(this.jsonifier.writeValueAsString(testSavedListDTO));
 	         
 	        ResultMatcher checkStatus = status().isOk();
-	        ResultMatcher checkBody = content().json(testSavedListDTOAsJson);
+	        ResultMatcher checkBody = content().json(testSavedListAsJson);
 	        
 	        this.mvc.perform(request).andExpect(checkStatus).andExpect(checkBody);
 	    }
@@ -94,7 +105,7 @@ public class TaskListControllerIntergrationTest {
 	 @Test
 	    public void readByIdIntegrationTest() throws Exception {
 
-		 TaskListDTO testSavedDTO = mapToDTO(TEST_TaskList_2);    
+		 TaskListDTO testSavedDTO = mapToDTO(TEST_LIST_2);    
 		 String TestSavedDTOAsJson = this.jsonifier.writeValueAsString(testSavedDTO); //response string
 	        
 	        RequestBuilder request = get(URI + "/read/2")
@@ -106,4 +117,34 @@ public class TaskListControllerIntergrationTest {
 	        
 	        this.mvc.perform(request).andExpect(checkStatus).andExpect(checkBody);
 	    }
+	 @Test
+	    public void updateIntegrationTest() throws Exception {
+
+		 TaskListDTO testSavedDTO = mapToDTO(TEST_LIST_1);    
+		 String TestSavedDTOAsJson = this.jsonifier.writeValueAsString(testSavedDTO); //response string
+	        
+	        RequestBuilder request = put(URI + "/update/1")
+	        		.contentType(MediaType.APPLICATION_JSON)
+	        		.content(this.jsonifier.writeValueAsString(testSavedDTO));
+	         
+	        ResultMatcher checkStatus = status().isAccepted();
+	        ResultMatcher checkBody = content().json(TestSavedDTOAsJson);
+	        
+	        this.mvc.perform(request).andExpect(checkStatus).andExpect(checkBody);
+	    }
+	 
+	 @Test
+	    public void deleteIntegrationTest() throws Exception {
+
+		 TaskListDTO testSavedDTO = mapToDTO(TEST_LIST_1);    
+		
+	        RequestBuilder request = delete(URI + "/delete/1")
+	        		.contentType(MediaType.APPLICATION_JSON)
+	        		.content(this.jsonifier.writeValueAsString(testSavedDTO));
+	         
+	        ResultMatcher checkStatus = status().isNoContent();
+	        
+	        this.mvc.perform(request).andExpect(checkStatus);
+	    }
+
 }
