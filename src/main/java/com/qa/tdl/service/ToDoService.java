@@ -57,7 +57,7 @@ public class ToDoService {
 
 
 	public boolean delete(Long id) {
-		this.repo.deleteById(id);//
-		return !this.repo.existsById(id);//
+		this.repo.deleteById(id);
+		return !this.repo.existsById(id);
 	}
 }

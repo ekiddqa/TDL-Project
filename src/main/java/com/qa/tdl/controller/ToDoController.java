@@ -52,7 +52,7 @@ public class ToDoController {
 	
 	@PutMapping("/update/{id}")
 	public ResponseEntity<ToDoDTO> update(@PathVariable Long id, @RequestBody ToDoDTO toDoListDTO){
-		return new ResponseEntity<>(this.service.update(toDoListDTO, id), HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(this.service.update(id, toDoListDTO), HttpStatus.ACCEPTED);
 	}
 	
 	@DeleteMapping("/delete/{id}")

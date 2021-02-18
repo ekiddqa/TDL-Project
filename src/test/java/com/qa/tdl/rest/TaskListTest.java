@@ -61,9 +61,9 @@ public class TaskListTest {
 
 	@Test
 	void updateTest() throws Exception {
-		when(this.service.update(null, 1L)).thenReturn(this.mapToDTO(TEST_LIST_1));
+		when(this.service.update(1L, null)).thenReturn(this.mapToDTO(TEST_LIST_1));
 		assertThat(new ResponseEntity<TaskListDTO>(this.mapToDTO(TEST_LIST_1), HttpStatus.ACCEPTED))
 				.isEqualTo(this.controller.update(1L, null));
-		verify(this.service, atLeastOnce()).update(null, 1L);
+		verify(this.service, atLeastOnce()).update(1L, null);
 	}
 }
