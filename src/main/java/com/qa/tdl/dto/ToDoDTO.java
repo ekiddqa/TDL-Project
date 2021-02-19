@@ -12,8 +12,5 @@ public class ToDoDTO {
 	
 	private Long id;
 	private String task;
-    private boolean completed;
-
-
 
 }

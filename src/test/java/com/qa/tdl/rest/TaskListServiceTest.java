@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Disabled;
@@ -68,7 +69,7 @@ public class TaskListServiceTest {
 	@Test
 	@Disabled
 	void testReadById() {
-		when(this.repo.findById(1L)).thenReturn(TEST_SAVED_LIST_1);
+		when(this.repo.findById(1L)).thenReturn(TEST_LIST_2);
 		assertThat(mapToTaskList(this.service.readById(1L)))
 				.isEqualTo(this.repo.findById(1L));
 		verify(this.repo, atLeastOnce()).findById(1L);

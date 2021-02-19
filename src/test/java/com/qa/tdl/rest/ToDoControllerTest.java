@@ -43,11 +43,11 @@ public class ToDoControllerTest {
 	private final TaskList TEST_LIST_1 = new TaskList(1L, "Chores", new ArrayList<>());
 	private final TaskList TEST_LIST_2 = new TaskList(2L, "Admin", new ArrayList<>());
 	
-	private final ToDo TEST_TASK_1 = new ToDo(1L, "Laundry", false, TEST_LIST_1);
-	private final ToDo TEST_TASK_2 = new ToDo(2L, "Grocery Shopping", true, TEST_LIST_1);
-	private final ToDo TEST_TASK_3 = new ToDo(3L, "Tidy House", false, TEST_LIST_1);
-	private final ToDo TEST_TASK_4 = new ToDo(4L, "Reorganise bills into alphabetical statments", true, TEST_LIST_2);
-	private final ToDo TEST_TASK_5 = new ToDo(2L, "Meet Barbara", false, null);
+	private final ToDo TEST_TASK_1 = new ToDo(1L, "Laundry", TEST_LIST_1);
+	private final ToDo TEST_TASK_2 = new ToDo(2L, "Grocery Shopping", TEST_LIST_1);
+	private final ToDo TEST_TASK_3 = new ToDo(3L, "Tidy House", TEST_LIST_1);
+	private final ToDo TEST_TASK_4 = new ToDo(4L, "Reorganise bills into alphabetical statments", TEST_LIST_2);
+	private final ToDo TEST_TASK_5 = new ToDo(2L, "Meet Barbara", null);
 	
 	private final List<ToDo> LISTOFTASKS = List.of(TEST_TASK_1, TEST_TASK_2, TEST_TASK_3, TEST_TASK_4, TEST_TASK_5);
 

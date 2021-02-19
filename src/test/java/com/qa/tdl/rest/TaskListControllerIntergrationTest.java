@@ -48,10 +48,10 @@ public class TaskListControllerIntergrationTest {
 		return this.mapper.map(taskList, TaskListDTO.class);
 	}
 	
-	private ToDo TEST_TASK_1 = new ToDo(1L, "Laundry", false, null);
-	private ToDo TEST_TASK_2 = new ToDo(2L, "Grocery Shopping", true, null);
-	private ToDo TEST_TASK_3 = new ToDo(3L, "Tidy house", false, null);
-	private ToDo TEST_TASK_4 = new ToDo(4L, "Reorganise bills into alphabetical statments", true, null);
+	private ToDo TEST_TASK_1 = new ToDo(1L, "Laundry", null);
+	private ToDo TEST_TASK_2 = new ToDo(2L, "Grocery Shopping", null);
+	private ToDo TEST_TASK_3 = new ToDo(3L, "Tidy house", null);
+	private ToDo TEST_TASK_4 = new ToDo(4L, "Reorganise bills into alphabetical statments", null);
 	List<ToDo> choresList = List.of(TEST_TASK_1, TEST_TASK_2, TEST_TASK_3);
 	List<ToDo> adminList = List.of(TEST_TASK_4);
 	
@@ -88,7 +88,7 @@ public class TaskListControllerIntergrationTest {
 
 	        List<TaskListDTO> testSavedListDTO = List.of(mapToDTO(TEST_LIST_1), mapToDTO(TEST_LIST_2)); 
 	        
-	        String testSavedListAsJson = this.jsonifier.writeValueAsString(LISTOFTASKLISTS); //response string
+	        String testSavedListAsJson = this.jsonifier.writeValueAsString(testSavedListDTO); //response string
 	        
 	        RequestBuilder request = get(URI + "/read")
 	        		.contentType(MediaType.APPLICATION_JSON)
