@@ -13,11 +13,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import com.qa.tdl.dto.TaskListDTO;
 import com.qa.tdl.dto.ToDoDTO;
 import com.qa.tdl.persistence.domain.TaskList;
 import com.qa.tdl.persistence.domain.ToDo;
-import com.qa.tdl.persistence.repo.TaskListRepo;
 import com.qa.tdl.persistence.repo.ToDoRepo;
 import com.qa.tdl.service.TaskListService;
 import com.qa.tdl.service.ToDoService;
@@ -37,7 +35,7 @@ public class ToDoServiceTest {
 		return this.mapper.map(toDo, ToDoDTO.class);
 	}
 	
-	private ToDo mapToTaskList(ToDoDTO toDoDTO) {
+	private ToDo mapToToDo(ToDoDTO toDoDTO) {
 		return this.mapper.map(toDoDTO, ToDo.class);
 	}
 	
@@ -57,10 +55,10 @@ public class ToDoServiceTest {
 	
 	@Test
 	void testCreate() {
-		when(this.repo.save(TEST_LIST_1)).thenReturn(TEST_LIST_1);
-		assertThat(mapToTaskList(this.service.create(TEST_LIST_1)))
-				.isEqualTo(this.repo.save(TEST_LIST_1));
-		verify(this.repo, atLeastOnce()).save(TEST_LIST_1);
+		when(this.repo.save(TEST_TASK_1)).thenReturn(TEST_SAVED_TASK_1);
+		assertThat(mapToToDo(this.service.create(TEST_TASK_1)))
+				.isEqualTo(TEST_SAVED_TASK_1);
+		verify(this.repo, atLeastOnce()).save(TEST_TASK_1);
 	}
 	
 	@Test

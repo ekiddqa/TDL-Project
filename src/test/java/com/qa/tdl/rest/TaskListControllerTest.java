@@ -45,7 +45,7 @@ public class TaskListControllerTest {
 	private final List<TaskList> LISTOFTASKSLISTS = List.of(TEST_LIST_1, TEST_LIST_2);
 
 	@Test
-	void createTest() throws Exception {
+	void testCreate() throws Exception {
 		when(this.service.create(TEST_LIST_1)).thenReturn(this.mapToDTO(TEST_LIST_1));
 		assertThat(new ResponseEntity<TaskListDTO>(this.mapToDTO(TEST_LIST_1), HttpStatus.CREATED))
 				.isEqualTo(this.controller.create(TEST_LIST_1));
@@ -53,7 +53,7 @@ public class TaskListControllerTest {
 	}
 	
 	@Test
-	void readByIdTest() throws Exception {
+	void testReadById() throws Exception {
 		when(this.service.readById(2L)).thenReturn(this.mapToDTO(TEST_LIST_2));
 		assertThat(new ResponseEntity<TaskListDTO>(this.mapToDTO(TEST_LIST_2), HttpStatus.OK))
 				.isEqualTo(this.controller.readById(2L));
@@ -61,7 +61,7 @@ public class TaskListControllerTest {
 	}
 
 	@Test
-	void readAllTest() throws Exception {
+	void testReadAll() throws Exception {
 		List<TaskListDTO> LISTOFTASKSLISTSDTO = List.of(mapToDTO(TEST_LIST_1), mapToDTO(TEST_LIST_2));
 		
 		when(this.service.readAll()).thenReturn(LISTOFTASKSLISTSDTO);
@@ -71,7 +71,7 @@ public class TaskListControllerTest {
 	}
 	
 	@Test
-	void updateTest() throws Exception {
+	void testUpdate() throws Exception {
 		when(this.service.update(1L, null)).thenReturn(this.mapToDTO(TEST_LIST_1));
 		assertThat(new ResponseEntity<TaskListDTO>(this.mapToDTO(TEST_LIST_1), HttpStatus.ACCEPTED))
 				.isEqualTo(this.controller.update(1L, null));
@@ -79,7 +79,7 @@ public class TaskListControllerTest {
 	}
 	
 	@Test
-	void deleteTest() throws Exception {
+	void testDelete() throws Exception {
 		when(this.service.delete(1L)).thenReturn(true);
 		assertThat(new ResponseEntity<TaskListDTO>(HttpStatus.NO_CONTENT))
 				.isEqualTo(this.controller.delete(1L, null));
