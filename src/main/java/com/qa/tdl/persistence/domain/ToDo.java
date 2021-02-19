@@ -32,5 +32,15 @@ public class ToDo {
 	
     @ManyToOne
     private TaskList taskList = null;
+
+
+	public ToDo(@NotNull String task, @NotNull boolean complete, TaskList taskList) {
+		super();
+		this.task = task;
+		this.complete = complete;
+		this.taskList = taskList;
+	}
+    
+    
 	 
 }

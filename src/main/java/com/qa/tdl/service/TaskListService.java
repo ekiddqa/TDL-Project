@@ -22,6 +22,7 @@ public class TaskListService {
 	//Maps to DTO/domain
 	private ModelMapper mapper;
 
+	//Turns TaskList to DTO's
 	private TaskListDTO mapToDTO(TaskList taskList) {
 		return this.mapper.map(taskList, TaskListDTO.class);
 	}

@@ -1,0 +1,91 @@
+package com.qa.tdl.rest;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
+import com.qa.tdl.dto.TaskListDTO;
+import com.qa.tdl.dto.ToDoDTO;
+import com.qa.tdl.persistence.domain.TaskList;
+import com.qa.tdl.persistence.domain.ToDo;
+import com.qa.tdl.persistence.repo.TaskListRepo;
+import com.qa.tdl.persistence.repo.ToDoRepo;
+import com.qa.tdl.service.TaskListService;
+import com.qa.tdl.service.ToDoService;
+
+public class ToDoServiceTest {
+	
+	@Autowired
+	private ToDoService service;
+	
+	@MockBean
+	private ToDoRepo repo;
+	
+	@Autowired
+	private ModelMapper mapper;
+
+	private ToDoDTO mapToDTO(ToDo toDo) {
+		return this.mapper.map(toDo, ToDoDTO.class);
+	}
+	
+	private ToDo mapToTaskList(ToDoDTO toDoDTO) {
+		return this.mapper.map(toDoDTO, ToDo.class);
+	}
+	
+	private ToDo TEST_TASK_1 = new ToDo("Laundry", false, null);
+	private ToDo TEST_SAVED_TASK_1 = new ToDo(1L, "Laundry", false, null);
+	private ToDo TEST_TASK_2 = new ToDo(2L, "Grocery Shopping", true, null);
+	private ToDo TEST_TASK_3 = new ToDo(3L, "Tidy house", false, null);
+	private ToDo TEST_TASK_4 = new ToDo(4L, "Reorganise bills into alphabetical statments", true, null);
+	private final ToDo TEST_TASK_5 = new ToDo(2L, "Meet Barbara", false, null);
+	List<ToDo> choresList = List.of(TEST_TASK_1, TEST_TASK_2, TEST_TASK_3);
+	List<ToDo> adminList = List.of(TEST_TASK_4);
+	
+	private final TaskList TEST_LIST_1 = new TaskList(1L, "Chores", choresList);
+	private final TaskList TEST_LIST_2 = new TaskList(2L, "Admin", adminList);
+	
+	private final List<TaskList> LISTOFTASKLISTS = List.of(TEST_LIST_1, TEST_LIST_2);
+	
+	@Test
+	void testCreate() {
+		when(this.repo.save(TEST_LIST_1)).thenReturn(TEST_LIST_1);
+		assertThat(mapToTaskList(this.service.create(TEST_LIST_1)))
+				.isEqualTo(this.repo.save(TEST_LIST_1));
+		verify(this.repo, atLeastOnce()).save(TEST_LIST_1);
+	}
+	
+	@Test
+	void testReadAll() {
+		when(this.repo.findAll().thenReturn(LISTOFTASKSLISTS),
+		assertThat(this.service.readAll()))
+				.isEqualTo(this.repo.findAll());
+		verify(this.repo, atLeastOnce()).findAll();
+	}
+
+	@Test
+	void testReadById() {
+		when(this.repo.findById(1L)).thenReturn(TEST_SAVED_LIST_1);
+		assertThat(mapToTaskList(this.service.readById(1L)))
+				.isEqualTo(this.repo.findById(1L));
+		verify(this.repo, atLeastOnce()).findById(1L);
+	}
+	
+	
+	@Test
+	void testDelete() {
+		when(this.repo.deleteById(2L)).thenReturn(true);
+		assertThat(this.service.delete(2L))
+				.isEqualTo(this.repo.deleteById(2L));
+		verify(this.repo, atLeastOnce()).deleteById(2L);
+	}
+
+}
