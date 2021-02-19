@@ -47,11 +47,10 @@ public class ToDoControllerIntegration {
 	}
 	
 	private ToDo TEST_TASK_1 = new ToDo("Laundry", null);
-	private ToDo TEST_SAVED_TASK_1 = new ToDo(1L, "Laundry", null);
 	private ToDo TEST_TASK_2 = new ToDo(2L, "Grocery Shopping", null);
 	private ToDo TEST_TASK_3 = new ToDo(3L, "Tidy house", null);
 	private ToDo TEST_TASK_4 = new ToDo(4L, "Reorganise bills into alphabetical statments", null);
-	private final ToDo TEST_TASK_5 = new ToDo(2L, "Meet Barbara", null);
+	private final ToDo TEST_TASK_5 = new ToDo(5L, "Meet Barbara", null);
 	List<ToDo> choresList = List.of(TEST_TASK_1, TEST_TASK_2, TEST_TASK_3);
 	List<ToDo> adminList = List.of(TEST_TASK_4);
 	

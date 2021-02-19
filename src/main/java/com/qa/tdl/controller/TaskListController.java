@@ -59,7 +59,7 @@ public class TaskListController {
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<TaskListDTO> delete(@PathVariable Long id, @RequestBody TaskListDTO taskListDTO){
+	public ResponseEntity<TaskListDTO> delete(@PathVariable Long id){
 		return this.service.delete(id) ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}

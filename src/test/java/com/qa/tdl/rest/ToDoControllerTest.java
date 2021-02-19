@@ -89,7 +89,7 @@ public class ToDoControllerTest {
 	void deleteTest() throws Exception {
 		when(this.service.delete(1L)).thenReturn(true);
 		assertThat(new ResponseEntity<ToDoDTO>(HttpStatus.NO_CONTENT))
-				.isEqualTo(this.controller.delete(1L, null));
+				.isEqualTo(this.controller.delete(1L));
 		verify(this.service, atLeastOnce()).delete(1L);
 	}
 	
@@ -97,7 +97,7 @@ public class ToDoControllerTest {
 	void deleteInternalServerErrorTest() throws Exception {
 		when(this.service.delete(999999L)).thenReturn(false);
 		assertThat(new ResponseEntity<ToDoDTO>(HttpStatus.INTERNAL_SERVER_ERROR))
-				.isEqualTo(this.controller.delete(999999L, null));
+				.isEqualTo(this.controller.delete(999999L));
 		verify(this.service, atLeastOnce()).delete(999999L);
 	}
 }

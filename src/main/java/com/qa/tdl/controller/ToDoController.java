@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,6 @@ import com.qa.tdl.dto.ToDoDTO;
 import com.qa.tdl.persistence.domain.ToDo;
 import com.qa.tdl.service.ToDoService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 @CrossOrigin
@@ -35,8 +35,8 @@ public class ToDoController {
 	}
 
 	@PostMapping("/create")
-	public ResponseEntity<ToDoDTO> create(@RequestBody ToDo toDoList) {
-		ToDoDTO created = this.service.create(toDoList);
+	public ResponseEntity<ToDoDTO> create(@RequestBody ToDo toDo) {
+		ToDoDTO created = this.service.create(toDo);
 		return new ResponseEntity<>(created, HttpStatus.CREATED);
 	}
 	
@@ -56,7 +56,7 @@ public class ToDoController {
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<ToDoDTO> delete(@PathVariable Long id, @RequestBody ToDoDTO toDoListDTO){
+	public ResponseEntity<ToDoDTO> delete(@PathVariable Long id){
 		return this.service.delete(id) ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}

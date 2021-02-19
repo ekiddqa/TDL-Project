@@ -29,8 +29,10 @@ public class ToDoServiceTest {
 	@MockBean
 	private ToDoRepo repo;
 	
-	@Autowired
+	@MockBean
 	private ModelMapper mapper;
+	
+	static final ModelMapper testMapper = new ModelMapper();
 
 	private ToDoDTO mapToDTO(ToDo toDo) {
 		return this.mapper.map(toDo, ToDoDTO.class);
@@ -40,8 +42,8 @@ public class ToDoServiceTest {
 		return this.mapper.map(toDoDTO, ToDo.class);
 	}
 	
-	private ToDo TEST_TASK_1 = new ToDo("Laundry", null);
-	private ToDo TEST_SAVED_TASK_1 = new ToDo(1L, "Laundry", null);
+	private ToDo TEST_TASK_1 = new ToDo("Laundry");
+	private ToDo TEST_SAVED_TASK_1 = new ToDo(1L,"Laundry");
 	private ToDo TEST_TASK_2 = new ToDo(2L, "Grocery Shopping", null);
 	//private Optional<ToDo> TEST_TASK_OP_2 = new ToDo(2L, "Grocery Shopping", null);
 	private ToDo TEST_TASK_3 = new ToDo(3L, "Tidy house", null);
