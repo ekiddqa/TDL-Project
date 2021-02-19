@@ -27,7 +27,6 @@ public class ToDo {
     @NotNull
     private boolean complete;
     
-	/*
-	 * @ManyToOne private ToDoList group = null;
-	 */
+	@ManyToOne private ToDoList group = null;
+	
 }
