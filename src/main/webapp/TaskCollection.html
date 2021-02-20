@@ -1,0 +1,112 @@
+<!DOCTYPE html> <!-- HTML5 Document Type Definition -->
+<html>
+    <head>
+        <title>To Do List</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="StyleSheet.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+            <div class="col-0"><h1>To Do List</h1></div>
+            </div>
+            </div>
+        </div>
+    </br>
+
+    <div class="container">
+        <div class="row">
+        <div class="col-2"><h4>Menu:</h4></div>
+        <div class="col-3">
+            <h5><a href="TaskCollection.html" class="nav-link">Task Collections</a></h5> 
+        </div>
+        <div class="col-3">
+            <h5><a href="index.html" class="nav-link">Indivual Tasks</a></h5>
+        </div>
+        </div>
+        </div>  
+    </br>
+</br>
+
+    <form action="POST">
+        <div class="container">
+           <div class="row">
+                <label for="toDoTaskCreation">What is the group called?</label></div></div>
+        <div class="container">
+            <div class="row">
+                <input type="text" name="taskDesc" id="taskListCreate"></div></div>       
+</br>
+                </form>
+<div class="container">
+    <div class="row">    
+        <button type="button" class="btn btn-primary"  onclick="createTaskList()"> Create </button>
+    </div>    
+    </div>
+        </br>
+    </br>
+    <div class="container">
+        <div class="row">
+            <form action="GET">
+             <label for="readTaskListById">Read a group (by Id)</label></div></div>
+    <div class="container">
+        <div class="row"> 
+             <input type="text" name="ReadTaskListId" id="readTaskListId"></div></div>
+            </form>
+        </br>   
+    <div class="container">
+        <div class="row">
+            <button type="button" class="btn btn-secondary" onclick ="readByIdTaskList()"> Get Group</button>
+        
+        </div>
+    </div>
+    </br>
+    <div class="container">
+        <div class="row">
+            <button type="button" class="btn btn-primary"  onclick="readAllTaskList()"> Get All Groups! </button>
+        </div>
+        </div>
+        </br>
+</br>
+<form action="PUT">
+<div class="container">
+    <div class="row">
+    <label for="updateTaskListGet">What group do you want to update? Enter its ID</label></div></div>
+    
+<div class="container">
+    <div class="row">
+    <input type="text" name="UpdateTaskListId" id="TaskListIdUpdate"></div></div>
+    
+<div class="container">
+    <div class="row">
+    <label for="updateTaskListNew">What is the the NEW group?</label></div></div>
+<div class="container">
+    <div class="row">
+    <input type="text" name="UpdateTaskListName" id="taskListNameUpdate">
+</form>
+</div>
+</div>
+</br>
+<div class="container">
+    <div class="row">
+        <button type="button" class="btn btn-success" onclick ="updateTaskList()"> Update </button>
+</div>
+</div>
+</br>
+<form action="DELETE">
+    <div class="container">
+        <div class="row">
+        <label for="deleteTaskList">What task do you want to delete? Enter its ID</label></div></div>
+        <div class="container">
+            <div class="row">
+            <input type="text" name="deleteTaskListId" id="taskListDelete"></div></div>
+            </br>
+    <div class="container">
+          <div class="row">
+                <button type="button" class="btn btn-danger"> Delete </button></div></div>
+          </br>
+        <script src="TaskCollectionScript.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    </body>
+</html>
