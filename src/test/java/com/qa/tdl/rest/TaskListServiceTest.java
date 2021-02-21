@@ -38,8 +38,8 @@ public class TaskListServiceTest {
 		return this.mapper.map(taskList, TaskListDTO.class);
 	}
 	
-	private final TaskList TEST_LIST_1 = new TaskList("Test List 1", null);
-	private final TaskList TEST_LIST_2 = new TaskList("Test List 2", null);
+	private final TaskList TEST_LIST_1 = new TaskList("Chores", null);
+	private final TaskList TEST_LIST_2 = new TaskList("Admin", null);
 	
 
 	
@@ -54,13 +54,12 @@ public class TaskListServiceTest {
 	}
 	
 	@Test
-	@Disabled
 	void testReadAll() {
-		final List<TaskList> LISTOFTASKSLISTS = List.of(TEST_LIST_1, TEST_LIST_2);
-		List<TaskListDTO> LISTOFTASKSLISTSDTO = List.of(mapToDTO(TEST_LIST_1), mapToDTO(TEST_LIST_2));
-		when(this.repo.findAll().thenReturn(LISTOFTASKSLISTS),
-		assertThat(this.service.readAll()))
-				.isEqualTo(LISTOFTASKSLISTSDTO);
+		final List<TaskList> listOfTasks = List.of(TEST_LIST_1, TEST_LIST_2);
+		List<TaskListDTO> listofTasksDTO = listOfTasks.stream().map(this::mapToDTO).collect(Collectors.toList());
+		when(this.repo.findAll()).thenReturn(listOfTasks);
+		assertThat(this.service.readAll())
+				.isEqualTo(listofTasksDTO);
 		verify(this.repo, atLeastOnce()).findAll();
 	}
 
