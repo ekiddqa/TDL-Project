@@ -22,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.qa.tdl.dto.TaskListDTO;
 import com.qa.tdl.persistence.domain.TaskList;
+import com.qa.tdl.persistence.domain.ToDo;
 import com.qa.tdl.persistence.repo.TaskListRepo;
 import com.qa.tdl.service.TaskListService;
 
@@ -40,8 +41,6 @@ public class TaskListServiceTest {
 	private TaskList mapToTaskList(TaskListDTO taskListDTO) {
 		return this.mapper.map(taskListDTO, TaskList.class);
 	}
-	
-	
 	private final TaskList TEST_LIST_1 = new TaskList(null, "Chores", new ArrayList<>());
 	private final TaskList TEST_SAVED_LIST_1 = new TaskList(1L, "Chores", new ArrayList<>());
 	private final TaskList TEST_LIST_2 = new TaskList(2L, "Admin", new ArrayList<>());
@@ -67,9 +66,10 @@ public class TaskListServiceTest {
 
 	@Test
 	void testReadById() {
-		when(this.repo.findById(1L)).thenReturn(TEST_LIST_2);
-		assertThat(mapToTaskList(this.service.readById(1L)))
-				.isEqualTo(this.repo.findById(1L));
+		Optional<TaskList> y = Optional.of(this.TEST_LIST_2);
+		when(this.repo.findById(1L)).thenReturn(y);
+		assertThat(Optional.of(mapToTaskList(this.service.readById(1L))))
+				.isEqualTo((this.repo.findById(1L)));
 		verify(this.repo, atLeastOnce()).findById(1L);
 	}
 	
