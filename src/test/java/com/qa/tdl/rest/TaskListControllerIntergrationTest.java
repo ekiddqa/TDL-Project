@@ -60,7 +60,7 @@ public class TaskListControllerIntergrationTest {
 	
 	private final List<TaskList> LISTOFTASKLISTS = List.of(TEST_LIST_1, TEST_LIST_2);
 
-	private final String URI = "/TaskList";
+	private final String URI = "/taskList";
 
 	
 	 @Test
