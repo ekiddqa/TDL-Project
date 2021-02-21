@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.qa.tdl.dto.TaskListDTO;
 import com.qa.tdl.dto.ToDoDTO;
 import com.qa.tdl.persistence.domain.TaskList;
 import com.qa.tdl.persistence.domain.ToDo;
@@ -46,7 +47,7 @@ public class ToDoControllerIntegration {
 		return this.mapper.map(toDo, ToDoDTO.class);
 	}
 	
-	private ToDo TEST_TASK_1 = new ToDo("Laundry", null);
+	private ToDo TEST_TASK_1 = new ToDo(1L, "Laundry", null);
 	private ToDo TEST_TASK_2 = new ToDo(2L, "Grocery Shopping", null);
 	private ToDo TEST_TASK_3 = new ToDo(3L, "Tidy house", null);
 	private ToDo TEST_TASK_4 = new ToDo(4L, "Reorganise bills into alphabetical statments", null);
@@ -54,10 +55,8 @@ public class ToDoControllerIntegration {
 	List<ToDo> choresList = List.of(TEST_TASK_1, TEST_TASK_2, TEST_TASK_3);
 	List<ToDo> adminList = List.of(TEST_TASK_4);
 	
-	private final TaskList TEST_LIST_1 = new TaskList(1L, "Chores", choresList);
-	private final TaskList TEST_LIST_2 = new TaskList(2L, "Admin", adminList);
-	
-	private final List<TaskList> LISTOFTASKLISTS = List.of(TEST_LIST_1, TEST_LIST_2);
+	private final List<ToDo> LISTOFTASKS = List.of(TEST_TASK_1, TEST_TASK_2, TEST_TASK_3, TEST_TASK_4, TEST_TASK_5);
+
 
 	private final String URI = "/toDo";
 
@@ -67,7 +66,7 @@ public class ToDoControllerIntegration {
 
 		 	ToDo createToDo = new ToDo(6L, "Some stuff", null);
 	        ToDoDTO testSavedDTO = mapToDTO(createToDo); 
-	        String TestSavedDTOAsJson = this.jsonifier.writeValueAsString(testSavedDTO); //response string
+	        String TestSavedDTOAsJson = this.jsonifier.writeValueAsString(testSavedDTO);
 
 	        RequestBuilder request = post(URI + "/create")
 	        		.contentType(MediaType.APPLICATION_JSON)
@@ -84,7 +83,7 @@ public class ToDoControllerIntegration {
 
 	        List<ToDoDTO> testSavedListDTO = List.of(mapToDTO(TEST_TASK_1), mapToDTO(TEST_TASK_2), mapToDTO(TEST_TASK_3), mapToDTO(TEST_TASK_4), mapToDTO(TEST_TASK_5)); 
 	        
-	        String testSavedListAsJson = this.jsonifier.writeValueAsString(LISTOFTASKLISTS); //response string
+	        String testSavedListAsJson = this.jsonifier.writeValueAsString(testSavedListDTO);
 	        
 	        RequestBuilder request = get(URI + "/read")
 	        		.contentType(MediaType.APPLICATION_JSON)
@@ -115,7 +114,7 @@ public class ToDoControllerIntegration {
 	    public void updateIntegrationTest() throws Exception {
 
 		 ToDoDTO testSavedDTO = mapToDTO(TEST_TASK_1);    
-		 String TestSavedDTOAsJson = this.jsonifier.writeValueAsString(testSavedDTO); //response string
+		 String TestSavedDTOAsJson = this.jsonifier.writeValueAsString(testSavedDTO);
 	        
 	        RequestBuilder request = put(URI + "/update/1")
 	        		.contentType(MediaType.APPLICATION_JSON)

@@ -41,12 +41,17 @@ public class TaskListServiceTest {
 	private TaskList mapToTaskList(TaskListDTO taskListDTO) {
 		return this.mapper.map(taskListDTO, TaskList.class);
 	}
+	
+	private TaskListDTO mapToDTO(TaskList taskList) {
+		return this.mapper.map(taskList, TaskListDTO.class);
+	}
+	
 	private final TaskList TEST_LIST_1 = new TaskList(null, "Chores", new ArrayList<>());
 	private final TaskList TEST_SAVED_LIST_1 = new TaskList(1L, "Chores", new ArrayList<>());
 	private final TaskList TEST_LIST_2 = new TaskList(2L, "Admin", new ArrayList<>());
 	
 	private final List<TaskList> LISTOFTASKSLISTS = List.of(TEST_LIST_1, TEST_LIST_2);
-	//List<TaskListDTO> LISTOFTASKSLISTSDTO = List.of(mapToDTO(TEST_LIST_1), mapToDTO(TEST_LIST_2));
+	List<TaskListDTO> LISTOFTASKSLISTSDTO = List.of(mapToDTO(TEST_LIST_1), mapToDTO(TEST_LIST_2));
 	
 	@Test
 	void testCreate() {
@@ -60,7 +65,7 @@ public class TaskListServiceTest {
 	void testReadAll() {
 		when(this.repo.findAll().thenReturn(LISTOFTASKSLISTS),
 		assertThat(this.service.readAll()))
-				.isEqualTo(this.repo.findAll());
+				.isEqualTo(LISTOFTASKSLISTSDTO);
 		verify(this.repo, atLeastOnce()).findAll();
 	}
 
