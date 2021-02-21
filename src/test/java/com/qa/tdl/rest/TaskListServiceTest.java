@@ -58,7 +58,6 @@ public class TaskListServiceTest {
 	}
 	
 	@Test
-	@Disabled
 	void testReadAll() {
 		when(this.repo.findAll().thenReturn(LISTOFTASKSLISTS),
 		assertThat(this.service.readAll()))
@@ -67,7 +66,6 @@ public class TaskListServiceTest {
 	}
 
 	@Test
-	@Disabled
 	void testReadById() {
 		when(this.repo.findById(1L)).thenReturn(TEST_LIST_2);
 		assertThat(mapToTaskList(this.service.readById(1L)))
@@ -77,7 +75,6 @@ public class TaskListServiceTest {
 	
 	
 	@Test
-	@Disabled
 	void testDelete() {
 		when(this.repo.deleteById(2L)).thenReturn(true);
 		assertThat(this.service.delete(2L))

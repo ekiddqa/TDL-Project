@@ -64,21 +64,18 @@ public class ToDoControllerIntegration {
 	
 	 @Test
 	    public void createIntegrationTest() throws Exception {
-	        
-	        // RESOURCES
-	        ToDoDTO testSavedDTO = mapToDTO(TEST_TASK_1); 
+
+		 	ToDo createToDo = new ToDo(6L, "Some stuff", null);
+	        ToDoDTO testSavedDTO = mapToDTO(createToDo); 
 	        String TestSavedDTOAsJson = this.jsonifier.writeValueAsString(testSavedDTO); //response string
-	        
-	        // ACTIONS
+
 	        RequestBuilder request = post(URI + "/create")
 	        		.contentType(MediaType.APPLICATION_JSON)
-	        		.content(this.jsonifier.writeValueAsString(TEST_TASK_1));
+	        		.content(this.jsonifier.writeValueAsString(createToDo));
 	        
-	        // ASSERTIONS
 	        ResultMatcher checkStatus = status().isCreated();
 	        ResultMatcher checkBody = content().json(TestSavedDTOAsJson);
-	        
-	        //checkbody = 
+	       
 	        this.mvc.perform(request).andExpect(checkStatus).andExpect(checkBody);
 	    }
 	 
