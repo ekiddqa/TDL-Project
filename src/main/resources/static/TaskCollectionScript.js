@@ -2,13 +2,26 @@
 
 const taskList = {}
 
+//Inputs
+const groupName = document.querySelector("#taskListCreate")
+const groupNameUpdate = document.getElementById("taskListNameUpdate")
+
+//Msgs
+const toDisplayReadItem = document.querySelector("#displayDivReadItem")
+
+
+const setTaskListId = (id) => {
+    let taskListId = document.getElementById("taskListId")
+    taskListId.value = id;
+}
+
 const createTaskList = () =>{
 fetch('http://localhost:9092/taskList/create', {
     method: 'post',
     headers: {
         "Content-type": "application/json"
     },
-    body: JSON.stringify(toDo)
+    body: JSON.stringify(taskList)
     })
     .then((response) => response.json())
     .then((data) => console.info(`Response succeeded with json ${data}`))

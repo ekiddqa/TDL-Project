@@ -2,13 +2,44 @@
 
 const toDo = {}
 
+//Inputs
+const toDoName = document.querySelector("#toDoCreate")
+const toDoNameUpdate = document.getElementById("toDoUpdate")
+const toDoGroup = document.getElementById("#taskListAssignmentCreate")
+const toDoGroupUpdate = document.getElementById("taskListUpdate")
+
+//Msgs
+const toDisplayReadItem = document.querySelector("#displayDivReadItem")
+
+const printOne = (record, display) => {
+	let actualText = document.createTextNode(`${record.name}`);
+	console.log(record.done);
+	if (record.done == 1) {
+		strike.appendChild(actualText);
+	} else {
+		display.append(actualText);
+	}
+}
+
+const printAll = (set,display) => {
+    for (let record of set) {
+        display.appendChild(document.createElement("br"));
+        printOne(record, display);
+    }
+    
+}
+
 const createToDo = () =>{
+let formInfo = {
+    task: toDoName.Value
+}
+
 fetch('http://localhost:9092/toDo/create', {
     method: 'post',
     headers: {
         "Content-type": "application/json"
     },
-    body: JSON.stringify(toDo)
+    body: JSON.stringify(formInfo)
     })
     .then((response) => response.json())
     .then((data) => console.info(`Response succeeded with json ${data}`))
@@ -23,7 +54,8 @@ fetch('http://localhost:9092/toDo/read')
         return;
     }
 response.json().
-then((data) => console.log(data));         
+then((data) => console.log(data));     
+printAll(data, toDisplayReadItem);    
  })
 .catch ((err) => console.log(`Fetch Error :-S ${err}`)
 );
@@ -36,9 +68,7 @@ const printById = () => {
     }
 }
 
-const readToDoById = () => {
-    let toDoId = getId.get("toDoId");
-    console.log(`the id is ${toDoId}`);
+const readToDoById = (id) => {
     fetch (`http://localhost:9092/toDo/read/${id}`)
     .then((response) => {
         if (response.status !==200){
@@ -71,4 +101,4 @@ const deleteToDo = () => {
         console.log(`Task successfully deleted.`)
       })
       .catch((err) => console.error(err));
-}
+    }

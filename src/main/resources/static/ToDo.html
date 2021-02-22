@@ -23,7 +23,7 @@
             <h5><a href="TaskCollection.html" class="nav-link">Task Collections</a></h5> 
         </div>
         <div class="col-3">
-            <h5><a href="index.html" class="nav-link">Indivual Tasks</a></h5>
+            <h5><a href="ToDo.html" class="nav-link">Indivual Tasks</a></h5>
         </div>
         </div>
         </div>  
@@ -33,15 +33,21 @@
     <form action="POST">
         <div class="container">
            <div class="row">
-                <label for="toDoTaskCreation">What is the group called?</label></div></div>
+                <label for="toDoTaskCreation">What is the the task?</label></div></div>
         <div class="container">
             <div class="row">
-                <input type="text" name="taskDesc" id="taskListCreate"></div></div>       
-</br>
+                <input type="text" name="ToDoDesc" id="toDoCreate"></div></div>       
+        <div class="container">
+            <div class="row">
+                <label for="taskListAssignment">Assign it into a group?</label></div>
+        <div class="container">
+            <div class="row">
+                    <input type="text" name="TaskListAssignmentCreate" id="taskListAssignmentCreate"></div></div>
                 </form>
+</br>
 <div class="container">
     <div class="row">    
-        <button type="button" class="btn btn-primary"  onclick="createTaskList()"> Create </button>
+        <button type="button" class="btn btn-primary" onclick="createToDo()"> Create </button>
     </div>    
     </div>
         </br>
@@ -49,64 +55,75 @@
     <div class="container">
         <div class="row">
             <form action="GET">
-             <label for="readTaskListById">Read a group (by Id)</label></div></div>
+             <label for="readToDoById">Read a Task (by Id)</label></div></div>
     <div class="container">
         <div class="row"> 
-             <input type="text" name="ReadTaskListId" id="readTaskListId"></div></div>
+             <input type="text" name="ReadToDoId" id="readToDoId"></div></div>
             </form>
         </br>   
     <div class="container">
         <div class="row">
-            <button type="button" class="btn btn-secondary" onclick ="readByIdTaskList()"> Get Group</button>
+            <button type="button" class="btn btn-secondary" onclick ="readToDoById()"> Get Task </button>
         
         </div>
     </div>
     </br>
     <div class="container">
         <div class="row">
-            <button type="button" class="btn btn-primary"  onclick="readAllTaskList()"> Get All Groups! </button>
+            <button type="button" class="btn btn-primary"  onclick="readAllToDo()"> Get All Tasks! </button>
         </div>
         </div>
         </br>
+        <div class="card" id="displayDivRead">
+        </div>
 </br>
 <form action="PUT">
 <div class="container">
     <div class="row">
-    <label for="updateTaskListGet">What group do you want to update? Enter its ID</label></div></div>
+    <label for="updateToDo">What task do you want to update? Enter its ID</label></div></div>
     
 <div class="container">
     <div class="row">
-    <input type="text" name="UpdateTaskListId" id="TaskListIdUpdate"></div></div>
+    <input type="text" name="UpdateToDoId" id="toDoIdUpdate"></div></div>
     
 <div class="container">
     <div class="row">
-    <label for="updateTaskListNew">What is the the NEW group?</label></div></div>
+    <label for="toDoTaskCreation">What is the the NEW task?</label></div></div>
+    
 <div class="container">
     <div class="row">
-    <input type="text" name="UpdateTaskListName" id="taskListNameUpdate">
+    <input type="text" name="UpdateToDoDesc" id="toDoUpdate"></div></div>
+
+<div class="container">
+    <div class="row">
+    <label for="taskListAssignment">Assign it into a group?</label></div></div>
+    
+<div class="container">
+    <div class="row">
+    <input type="text" name="UpdateGroupId" id="taskListUpdate"></div></div>
 </form>
 </div>
 </div>
 </br>
 <div class="container">
     <div class="row">
-        <button type="button" class="btn btn-success" onclick ="updateTaskList()"> Update </button>
+        <button type="button" class="btn btn-success" onclick ="updateToDo()"> Update </button>
 </div>
 </div>
 </br>
 <form action="DELETE">
     <div class="container">
         <div class="row">
-        <label for="deleteTaskList">What task do you want to delete? Enter its ID</label></div></div>
+        <label for="deleteTask">What task do you want to delete? Enter its ID</label></div></div>
         <div class="container">
             <div class="row">
-            <input type="text" name="deleteTaskListId" id="taskListDelete"></div></div>
+            <input type="text" name="deleteToDoId" id="toDoDelete"></div></div>
             </br>
     <div class="container">
           <div class="row">
                 <button type="button" class="btn btn-danger"> Delete </button></div></div>
           </br>
-        <script src="TaskCollectionScript.js"></script>
+        <script src="ToDoScript.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     </body>
 </html>
