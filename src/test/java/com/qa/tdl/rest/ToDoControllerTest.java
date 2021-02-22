@@ -40,48 +40,55 @@ public class ToDoControllerTest {
 		return this.mapper.map(ToDo, ToDoDTO.class);
 	}
 
-	private final TaskList TEST_LIST_1 = new TaskList(1L, "Chores", new ArrayList<>());
-	private final TaskList TEST_LIST_2 = new TaskList(2L, "Admin", new ArrayList<>());
+	private final TaskList testList1 = new TaskList(1L, "Chores", new ArrayList<>());
+	private final TaskList testList2 = new TaskList(2L, "Admin", new ArrayList<>());
 	
-	private final ToDo TEST_TASK_1 = new ToDo(1L, "Laundry", TEST_LIST_1);
-	private final ToDo TEST_TASK_2 = new ToDo(2L, "Grocery Shopping", TEST_LIST_1);
-	private final ToDo TEST_TASK_3 = new ToDo(3L, "Tidy House", TEST_LIST_1);
-	private final ToDo TEST_TASK_4 = new ToDo(4L, "Reorganise bills into alphabetical statments", TEST_LIST_2);
-	private final ToDo TEST_TASK_5 = new ToDo(2L, "Meet Barbara", null);
+	private final ToDo testTask1 = new ToDo(1L, "Laundry", testList1);
+	private final ToDo testTask2 = new ToDo(2L, "Grocery Shopping", testList1);
+	private final ToDo testTask3 = new ToDo(3L, "Tidy House", testList1);
+	private final ToDo testTask4 = new ToDo(4L, "Reorganise bills into alphabetical statments", testList2);
+	private final ToDo testTask5 = new ToDo(2L, "Meet Barbara", null);
 	
-	private final List<ToDo> LISTOFTASKS = List.of(TEST_TASK_1, TEST_TASK_2, TEST_TASK_3, TEST_TASK_4, TEST_TASK_5);
 
 	@Test
 	void createTest() throws Exception {
-		when(this.service.create(TEST_TASK_1)).thenReturn(this.mapToDTO(TEST_TASK_1));
-		assertThat(new ResponseEntity<ToDoDTO>(this.mapToDTO(TEST_TASK_1), HttpStatus.CREATED))
-				.isEqualTo(this.controller.create(TEST_TASK_1));
-		verify(this.service, atLeastOnce()).create(TEST_TASK_1);
+		when(this.service.create(testTask1)).thenReturn(this.mapToDTO(testTask1));
+		
+		assertThat(new ResponseEntity<ToDoDTO>(this.mapToDTO(testTask1), HttpStatus.CREATED))
+				.isEqualTo(this.controller.create(testTask1));
+		
+		verify(this.service, atLeastOnce()).create(testTask1);
 	}
 	
 	@Test
 	void readByIdTest() throws Exception {
-		when(this.service.readById(2L)).thenReturn(this.mapToDTO(TEST_TASK_2));
-		assertThat(new ResponseEntity<ToDoDTO>(this.mapToDTO(TEST_TASK_2), HttpStatus.OK))
+		when(this.service.readById(2L)).thenReturn(this.mapToDTO(testTask2));
+		
+		assertThat(new ResponseEntity<ToDoDTO>(this.mapToDTO(testTask2), HttpStatus.OK))
 				.isEqualTo(this.controller.readById(2L));
+		
 		verify(this.service, atLeastOnce()).readById(2L);
 	}
 
 	@Test
 	void readAllTest() throws Exception {
-		List<ToDoDTO> LISTOFTASKSLISTSDTO = List.of(mapToDTO(TEST_TASK_1), mapToDTO(TEST_TASK_2), mapToDTO(TEST_TASK_3), mapToDTO(TEST_TASK_4), mapToDTO(TEST_TASK_5));
+		List<ToDoDTO> LISTOFTASKSLISTSDTO = List.of(mapToDTO(testTask1), mapToDTO(testTask2), mapToDTO(testTask3), mapToDTO(testTask4), mapToDTO(testTask5));
 		
 		when(this.service.readAll()).thenReturn(LISTOFTASKSLISTSDTO);
+		
 		assertThat(new ResponseEntity<List<ToDoDTO>>(LISTOFTASKSLISTSDTO, HttpStatus.OK))
 				.isEqualTo(this.controller.readAll());
+		
 		verify(this.service, atLeastOnce()).readAll();
 	}
 	
 	@Test
 	void updateTest() throws Exception {
-		when(this.service.update(1L, null)).thenReturn(this.mapToDTO(TEST_TASK_1));
-		assertThat(new ResponseEntity<ToDoDTO>(this.mapToDTO(TEST_TASK_1), HttpStatus.ACCEPTED))
+		when(this.service.update(1L, null)).thenReturn(this.mapToDTO(testTask1));
+		
+		assertThat(new ResponseEntity<ToDoDTO>(this.mapToDTO(testTask1), HttpStatus.ACCEPTED))
 				.isEqualTo(this.controller.update(1L, null));
+		
 		verify(this.service, atLeastOnce()).update(1L, null);
 	}
 	
@@ -96,8 +103,10 @@ public class ToDoControllerTest {
 	@Test
 	void deleteInternalServerErrorTest() throws Exception {
 		when(this.service.delete(999999L)).thenReturn(false);
+		
 		assertThat(new ResponseEntity<ToDoDTO>(HttpStatus.INTERNAL_SERVER_ERROR))
 				.isEqualTo(this.controller.delete(999999L));
+		
 		verify(this.service, atLeastOnce()).delete(999999L);
 	}
 }

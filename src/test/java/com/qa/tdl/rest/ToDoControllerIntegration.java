@@ -23,9 +23,7 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.qa.tdl.dto.TaskListDTO;
 import com.qa.tdl.dto.ToDoDTO;
-import com.qa.tdl.persistence.domain.TaskList;
 import com.qa.tdl.persistence.domain.ToDo;
 
 @SpringBootTest
@@ -47,16 +45,13 @@ public class ToDoControllerIntegration {
 		return this.mapper.map(toDo, ToDoDTO.class);
 	}
 	
-	private ToDo TEST_TASK_1 = new ToDo(1L, "Laundry", null);
-	private ToDo TEST_TASK_2 = new ToDo(2L, "Grocery Shopping", null);
-	private ToDo TEST_TASK_3 = new ToDo(3L, "Tidy house", null);
-	private ToDo TEST_TASK_4 = new ToDo(4L, "Reorganise bills into alphabetical statments", null);
-	private final ToDo TEST_TASK_5 = new ToDo(5L, "Meet Barbara", null);
-	List<ToDo> choresList = List.of(TEST_TASK_1, TEST_TASK_2, TEST_TASK_3);
-	List<ToDo> adminList = List.of(TEST_TASK_4);
-	
-	private final List<ToDo> LISTOFTASKS = List.of(TEST_TASK_1, TEST_TASK_2, TEST_TASK_3, TEST_TASK_4, TEST_TASK_5);
-
+	private ToDo testTask1 = new ToDo(1L, "Laundry", null);
+	private ToDo testTask2 = new ToDo(2L, "Grocery Shopping", null);
+	private ToDo testTask3 = new ToDo(3L, "Tidy house", null);
+	private ToDo testTask4 = new ToDo(4L, "Reorganise bills into alphabetical statments", null);
+	private final ToDo testTask5 = new ToDo(5L, "Meet Barbara", null);
+	List<ToDo> choresList = List.of(testTask1, testTask2, testTask3);
+	List<ToDo> adminList = List.of(testTask4);
 
 	private final String URI = "/toDo";
 
@@ -81,7 +76,7 @@ public class ToDoControllerIntegration {
 	 @Test
 	    public void readAllIntegrationTest() throws Exception {
 
-	        List<ToDoDTO> testSavedListDTO = List.of(mapToDTO(TEST_TASK_1), mapToDTO(TEST_TASK_2), mapToDTO(TEST_TASK_3), mapToDTO(TEST_TASK_4), mapToDTO(TEST_TASK_5)); 
+	        List<ToDoDTO> testSavedListDTO = List.of(mapToDTO(testTask1), mapToDTO(testTask2), mapToDTO(testTask3), mapToDTO(testTask4), mapToDTO(testTask5)); 
 	        
 	        String testSavedListAsJson = this.jsonifier.writeValueAsString(testSavedListDTO);
 	        
@@ -98,8 +93,8 @@ public class ToDoControllerIntegration {
 	 @Test
 	    public void readByIdIntegrationTest() throws Exception {
 
-		 ToDoDTO testSavedDTO = mapToDTO(TEST_TASK_2);    
-		 String TestSavedDTOAsJson = this.jsonifier.writeValueAsString(testSavedDTO); //response string
+		 ToDoDTO testSavedDTO = mapToDTO(testTask2);    
+		 String TestSavedDTOAsJson = this.jsonifier.writeValueAsString(testSavedDTO);
 	        
 	        RequestBuilder request = get(URI + "/read/2")
 	        		.contentType(MediaType.APPLICATION_JSON)
@@ -113,7 +108,7 @@ public class ToDoControllerIntegration {
 	 @Test
 	    public void updateIntegrationTest() throws Exception {
 
-		 ToDoDTO testSavedDTO = mapToDTO(TEST_TASK_1);    
+		 ToDoDTO testSavedDTO = mapToDTO(testTask1);    
 		 String TestSavedDTOAsJson = this.jsonifier.writeValueAsString(testSavedDTO);
 	        
 	        RequestBuilder request = put(URI + "/update/1")
@@ -129,7 +124,7 @@ public class ToDoControllerIntegration {
 	 @Test
 	    public void deleteIntegrationTest() throws Exception {
 
-		 ToDoDTO testSavedDTO = mapToDTO(TEST_TASK_1);    
+		 ToDoDTO testSavedDTO = mapToDTO(testTask1);    
 		
 	        RequestBuilder request = delete(URI + "/delete/1")
 	        		.contentType(MediaType.APPLICATION_JSON)
