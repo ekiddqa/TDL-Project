@@ -6,6 +6,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -39,7 +40,7 @@ public class TaskListServiceTest {
 		return this.mapper.map(taskList, TaskListDTO.class);
 	}
 	
-	private final TaskList TEST_LIST_1 = new TaskList("Chores", null);
+	private final TaskList TEST_LIST_1 = new TaskList("Chores", new ArrayList<>());
 	private final TaskList TEST_LIST_2 = new TaskList("Admin", null);
 	
 
@@ -73,18 +74,6 @@ public class TaskListServiceTest {
 		verify(this.repo, atLeastOnce()).findById(1L);
 	}
 	
-	@Test
-	void testUpdate() {
-		Optional<TaskList> x = Optional.of(this.TEST_LIST_1);
-		TaskList y = new TaskList("Dummy", null);
-		TaskListDTO yDTO = mapToDTO(y);
-		TaskList z = new TaskList(1L, "Dummy", null);
-		
-		when(this.repo.findById(1L)).thenReturn(x);
-		when(this.service.update(1L, mapToDTO(z)).getGroupName()).thenReturn(z.getGroupName());
-		assertThat(this.service.update(1L, yDTO)).isEqualTo(mapToDTO(z));
-		verify(this.repo, atLeastOnce()).save(z);
-	}
 	
 	@Test
 	void testDelete() {
