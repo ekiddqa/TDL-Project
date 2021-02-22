@@ -1,6 +1,7 @@
 package com.qa.tdl.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -91,5 +92,16 @@ public class TaskListServiceCompare {
 		assertThat(this.service.delete(id)).isEqualTo(false);
 		verify(this.repo,times(1)).existsById(id);
 	}
+	
+	@Test
+	void updateTest() throws Exception {
+		TEST_LIST_1.setId(1L);
+		TaskListDTO expected = this.mapToTDLDto(TEST_LIST_1);
+		when(this.repo.findById(1L)).thenReturn(Optional.of(TEST_LIST_1));
+		when(this.repo.save(TEST_LIST_1)).thenReturn(TEST_LIST_1);
+		assertThat(this.service.update(1L, expected)).isEqualTo(expected);
+		verify(this.repo, atLeastOnce()).findById(1L);
+		verify(this.repo, atLeastOnce()).save(TEST_LIST_1);
+	}	
 
 }

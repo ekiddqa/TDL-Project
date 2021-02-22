@@ -16,6 +16,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.yaml.snakeyaml.error.YAMLException;
 
 import com.qa.tdl.dto.TaskListDTO;
 import com.qa.tdl.persistence.domain.TaskList;
@@ -64,22 +65,40 @@ public class TaskListServiceTest {
 	}
 
 	@Test
-	@Disabled
 	void testReadById() {
-		Optional<TaskList> y = Optional.of(this.TEST_LIST_2);
+		Optional<TaskList> y = Optional.of(this.TEST_LIST_1);
 		when(this.repo.findById(1L)).thenReturn(y);
-		assertThat(Optional.of(mapToTaskList(this.service.readById(1L))))
-				.isEqualTo((this.repo.findById(1L)));
+		assertThat(this.service.readById(1L))
+				.isEqualTo(this.mapToDTO(TEST_LIST_1));
 		verify(this.repo, atLeastOnce()).findById(1L);
 	}
 	
+	@Test
+	void testUpdate() {
+		Optional<TaskList> x = Optional.of(this.TEST_LIST_1);
+		TaskList y = new TaskList("Dummy", null);
+		TaskListDTO yDTO = mapToDTO(y);
+		TaskList z = new TaskList(1L, "Dummy", null);
+		
+		when(this.repo.findById(1L)).thenReturn(x);
+		when(this.service.update(1L, mapToDTO(z)).getGroupName()).thenReturn(z.getGroupName());
+		assertThat(this.service.update(1L, yDTO)).isEqualTo(mapToDTO(z));
+		verify(this.repo, atLeastOnce()).save(z);
+	}
 	
 	@Test
-	@Disabled
 	void testDelete() {
-		when(this.repo.deleteById(2L)).thenReturn(true);
+		when(this.repo.existsById(2L)).thenReturn(false);
 		assertThat(this.service.delete(2L))
-				.isEqualTo(this.repo.deleteById(2L));
+				.isEqualTo(true);
 		verify(this.repo, atLeastOnce()).deleteById(2L);
+	}
+	
+	@Test
+	void testDeleteFailure() {
+		when(this.repo.existsById(1L)).thenReturn(true);
+		assertThat(this.service.delete(1L))
+				.isEqualTo(false);
+		verify(this.repo, atLeastOnce()).deleteById(1L);
 	}
 }

@@ -65,8 +65,8 @@ public class ToDoServiceTest {
 	
 	@Test
 	void testReadAll() {
-		when(this.repo.findAll().thenReturn(LISTOFTODOS),
-		assertThat(this.service.readAll()))
+		when(this.repo.findAll()).thenReturn(LISTOFTODOS);
+		assertThat(this.service.readAll())
 				.isEqualTo(this.repo.findAll());
 		verify(this.repo, atLeastOnce()).findAll();
 	}
