@@ -23,7 +23,7 @@ import com.qa.tdl.persistence.repo.TaskListRepo;
 import com.qa.tdl.service.TaskListService;
 
 @SpringBootTest
-public class TaskListServiceTest {
+class TaskListServiceTest {
 	
 	@Autowired
 	private TaskListService service;
@@ -87,7 +87,7 @@ public class TaskListServiceTest {
 		when(this.repo.existsById(2L)).thenReturn(false);
 		
 		assertThat(this.service.delete(2L))
-				.isEqualTo(true);
+				.isTrue();
 		
 		verify(this.repo, atLeastOnce()).deleteById(2L);
 	}
@@ -97,7 +97,7 @@ public class TaskListServiceTest {
 		when(this.repo.existsById(1L)).thenReturn(true);
 		
 		assertThat(this.service.delete(1L))
-				.isEqualTo(false);
+				.isFalse();
 		
 		verify(this.repo, atLeastOnce()).deleteById(1L);
 	}
