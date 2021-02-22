@@ -60,7 +60,7 @@ class TaskListControllerIntergrationTest {
 
 	
 	 @Test
-	    public void createIntegrationTest() throws Exception {       
+	    void createIntegrationTest() throws Exception {       
 	        TaskListDTO testSavedDTO = mapToDTO(testList1); 
 	        String TestSavedDTOAsJson = this.jsonifier.writeValueAsString(testSavedDTO);
 	        
@@ -75,7 +75,7 @@ class TaskListControllerIntergrationTest {
 	    }
 	 
 	 @Test
-	    public void readAllIntegrationTest() throws Exception {
+	    void readAllIntegrationTest() throws Exception {
 	        List<TaskListDTO> testSavedListDTO = List.of(mapToDTO(testList1), mapToDTO(testList2)); 
 	        
 	        String testSavedListAsJson = this.jsonifier.writeValueAsString(testSavedListDTO);
@@ -91,7 +91,7 @@ class TaskListControllerIntergrationTest {
 	    }
 	 
 	 @Test
-	    public void readByIdIntegrationTest() throws Exception {
+	    void readByIdIntegrationTest() throws Exception {
 
 		 TaskListDTO testSavedDTO = mapToDTO(testList2);    
 		 String TestSavedDTOAsJson = this.jsonifier.writeValueAsString(testSavedDTO);
@@ -106,7 +106,7 @@ class TaskListControllerIntergrationTest {
 	        this.mvc.perform(request).andExpect(checkStatus).andExpect(checkBody);
 	    }
 	 @Test
-	    public void updateIntegrationTest() throws Exception {
+	    void updateIntegrationTest() throws Exception {
 
 		 TaskListDTO testSavedDTO = mapToDTO(testList1);    
 		 String TestSavedDTOAsJson = this.jsonifier.writeValueAsString(testSavedDTO);
@@ -122,7 +122,7 @@ class TaskListControllerIntergrationTest {
 	    }
 	 
 	 @Test
-	    public void deleteIntegrationTest() throws Exception {
+	    void deleteIntegrationTest() throws Exception {
 
 		 TaskListDTO testSavedDTO = mapToDTO(testList1);    
 		
