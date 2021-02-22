@@ -31,7 +31,7 @@ import com.qa.tdl.persistence.domain.ToDo;
 @ActiveProfiles("dev")
 @Sql(scripts = { "classpath:TDL-schema.sql",
 		"classpath:TDL-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-public class ToDoControllerIntegration {
+class ToDoControllerIntegrationTest {
 	
 	@Autowired
 	private MockMvc mvc;
@@ -57,7 +57,7 @@ public class ToDoControllerIntegration {
 
 	
 	 @Test
-	    public void createIntegrationTest() throws Exception {
+	    void createIntegrationTest() throws Exception {
 
 		 	ToDo createToDo = new ToDo(6L, "Some stuff", null);
 	        ToDoDTO testSavedDTO = mapToDTO(createToDo); 
@@ -74,7 +74,7 @@ public class ToDoControllerIntegration {
 	    }
 	 
 	 @Test
-	    public void readAllIntegrationTest() throws Exception {
+	    void readAllIntegrationTest() throws Exception {
 
 	        List<ToDoDTO> testSavedListDTO = List.of(mapToDTO(testTask1), mapToDTO(testTask2), mapToDTO(testTask3), mapToDTO(testTask4), mapToDTO(testTask5)); 
 	        
@@ -91,7 +91,7 @@ public class ToDoControllerIntegration {
 	    }
 	 
 	 @Test
-	    public void readByIdIntegrationTest() throws Exception {
+	    void readByIdIntegrationTest() throws Exception {
 
 		 ToDoDTO testSavedDTO = mapToDTO(testTask2);    
 		 String TestSavedDTOAsJson = this.jsonifier.writeValueAsString(testSavedDTO);
@@ -106,7 +106,7 @@ public class ToDoControllerIntegration {
 	        this.mvc.perform(request).andExpect(checkStatus).andExpect(checkBody);
 	    }
 	 @Test
-	    public void updateIntegrationTest() throws Exception {
+	    void updateIntegrationTest() throws Exception {
 
 		 ToDoDTO testSavedDTO = mapToDTO(testTask1);    
 		 String TestSavedDTOAsJson = this.jsonifier.writeValueAsString(testSavedDTO);
@@ -122,7 +122,7 @@ public class ToDoControllerIntegration {
 	    }
 	 
 	 @Test
-	    public void deleteIntegrationTest() throws Exception {
+	    void deleteIntegrationTest() throws Exception {
 
 		 ToDoDTO testSavedDTO = mapToDTO(testTask1);    
 		

@@ -25,7 +25,7 @@ import com.qa.tdl.service.ToDoService;
 
 @SpringBootTest
 @ActiveProfiles("dev")
-public class ToDoControllerTest {
+class ToDoControllerTest {
 	
 	@Autowired
 	private ToDoController controller;

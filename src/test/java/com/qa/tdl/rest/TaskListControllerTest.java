@@ -24,7 +24,7 @@ import com.qa.tdl.service.TaskListService;
 
 @SpringBootTest
 @ActiveProfiles("dev")
-public class TaskListControllerTest {
+class TaskListControllerTest {
 	
 	@Autowired
 	private TaskListController controller;
