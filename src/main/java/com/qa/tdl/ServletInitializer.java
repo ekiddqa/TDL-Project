@@ -1,4 +1,4 @@
-package com.example.tdl;
+package com.qa.tdl;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -7,7 +7,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(Tdl1Application.class);
+		return application.sources(TDLApplication.class);
 	}
 
 }

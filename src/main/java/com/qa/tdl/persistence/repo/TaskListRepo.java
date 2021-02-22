@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.qa.tdl.persistence.domain.ToDoList;
+import com.qa.tdl.persistence.domain.TaskList;
 
 @Repository
-public interface ToDoListRepo extends JpaRepository <ToDoList, Long>{
+public interface TaskListRepo extends JpaRepository <TaskList, Long>{
 
 	@Query
-	List<ToDoList> findByGroupName(String groupName);
+	List<TaskList> findByGroupName(String groupName);
 }

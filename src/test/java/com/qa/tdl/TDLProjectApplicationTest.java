@@ -1,10 +1,10 @@
-package com.example.tdl;
-
+package com.qa.tdl;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Tdl1ApplicationTests {
+class TDLProjectApplicationTest {
+	
 
 	@Test
 	void contextLoads() {

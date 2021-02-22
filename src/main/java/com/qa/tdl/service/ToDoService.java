@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qa.tdl.dto.ToDoDTO;
+import com.qa.tdl.exception.ToDoNotFoundException;
 import com.qa.tdl.persistence.domain.ToDo;
 import com.qa.tdl.persistence.repo.ToDoRepo;
 import com.qa.tdl.utilis.SpringBean;
@@ -42,21 +43,21 @@ public class ToDoService {
 }
 
 	public ToDoDTO readById(Long id) {
-		return this.mapToDTO(this.repo.findById(id).orElseThrow());
+		return this.mapToDTO(this.repo.findById(id).orElseThrow(ToDoNotFoundException::new));
 	}
 
 
-	public ToDoDTO update(ToDoDTO ToDoDto, Long id) {
+	public ToDoDTO update(Long id, ToDoDTO toDoDTO) {
 		
-		ToDo toUpdate = this.repo.findById(id).orElseThrow();
-		toUpdate.setTask(ToDoDto.getTask());
-		SpringBean.mergeNotNull(ToDoDto, toUpdate);
+		ToDo toUpdate = this.repo.findById(id).orElseThrow(ToDoNotFoundException::new);
+		toUpdate.setTask(toDoDTO.getTask());
+		SpringBean.mergeNotNull(toDoDTO, toUpdate);
 		return this.mapToDTO(this.repo.save(toUpdate));
 	}
 
 
 	public boolean delete(Long id) {
-		this.repo.deleteById(id);//
-		return !this.repo.existsById(id);//
+		this.repo.deleteById(id);
+		return !this.repo.existsById(id);
 	}
 }
