@@ -41,7 +41,7 @@
                 </form>
 <div class="container">
     <div class="row">    
-        <button type="button" class="btn btn-primary"  onclick="createTaskList()"> Create </button>
+        <button type="button" class="btn btn-primary" id="taskListCreateBtn" onclick="createTaskList()"> Create </button>
     </div>    
     </div>
         </br>
@@ -57,14 +57,14 @@
         </br>   
     <div class="container">
         <div class="row">
-            <button type="button" class="btn btn-secondary" onclick ="readByIdTaskList()"> Get Group</button>
+            <button type="button" class="btn btn-secondary" id="readTaskListIdBtn" onclick ="readByIdTaskList()"> Get Group</button>
         
         </div>
     </div>
     </br>
     <div class="container">
         <div class="row">
-            <button type="button" class="btn btn-primary"  onclick="readAllTaskList()"> Get All Groups! </button>
+            <button type="button" class="btn btn-primary" id="readAllTaskList" onclick="readAllTaskList()"> Get All Groups! </button>
         </div>
         </div>
         </br>
@@ -76,7 +76,7 @@
     
 <div class="container">
     <div class="row">
-    <input type="text" name="UpdateTaskListId" id="TaskListIdUpdate"></div></div>
+    <input type="text" name="UpdateTaskListId" id="taskListIdUpdate"></div></div>
     
 <div class="container">
     <div class="row">
@@ -90,7 +90,7 @@
 </br>
 <div class="container">
     <div class="row">
-        <button type="button" class="btn btn-success" onclick ="updateTaskList()"> Update </button>
+        <button type="button" class="btn btn-success" id="updateTaskListBtn" onclick ="updateTaskList()"> Update </button>
 </div>
 </div>
 </br>
@@ -104,7 +104,7 @@
             </br>
     <div class="container">
           <div class="row">
-                <button type="button" class="btn btn-danger"> Delete </button></div></div>
+                <button type="button" class="btn btn-danger" id="deleteTaskListBtn" onclick ="deleteTaskList()"> Delete </button></div></div>
           </br>
         <script src="TaskCollectionScript.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
