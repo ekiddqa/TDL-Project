@@ -63,8 +63,8 @@ public class TaskListServiceTest {
 	
 	@Test
 	void testReadAll() {
-		when(this.repo.findAll().thenReturn(LISTOFTASKSLISTS),
-		assertThat(this.service.readAll()))
+		when(this.repo.findAll()).thenReturn(LISTOFTASKSLISTS);
+		assertThat(this.service.readAll())
 				.isEqualTo(LISTOFTASKSLISTSDTO);
 		verify(this.repo, atLeastOnce()).findAll();
 	}

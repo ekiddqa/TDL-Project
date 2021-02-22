@@ -7,10 +7,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +32,7 @@ import com.qa.tdl.persistence.domain.ToDo;
 @ActiveProfiles("dev")
 @Sql(scripts = { "classpath:TDL-schema.sql",
 		"classpath:TDL-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-public class TaskListControllerIntergrationTest {
+class TaskListControllerIntergrationTest {
 	
 	@Autowired
 	private MockMvc mvc;

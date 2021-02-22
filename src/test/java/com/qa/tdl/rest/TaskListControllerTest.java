@@ -24,7 +24,7 @@ import com.qa.tdl.service.TaskListService;
 
 @SpringBootTest
 @ActiveProfiles("dev")
-public class TaskListControllerTest {
+class TaskListControllerTest {
 	
 	@Autowired
 	private TaskListController controller;
@@ -42,7 +42,6 @@ public class TaskListControllerTest {
 	private final TaskList TEST_LIST_1 = new TaskList(1L, "Chores", new ArrayList<>());
 	private final TaskList TEST_LIST_2 = new TaskList(2L, "Admin", new ArrayList<>());
 	
-	private final List<TaskList> LISTOFTASKSLISTS = List.of(TEST_LIST_1, TEST_LIST_2);
 
 	@Test
 	void testCreate() throws Exception {
