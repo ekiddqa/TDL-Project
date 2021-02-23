@@ -49,7 +49,7 @@ Go to the "Shortcut" tab and then to "Advanced button".
 
 You should see the option to "Run as administrator". Check this box if it's not already. Click "OK" then "Apply" to make the changes go into effect.
 
-![]https://cdn.discordapp.com/attachments/761214563660070922/804551313370906664/unknown.png)
+![](https://cdn.discordapp.com/attachments/761214563660070922/804551313370906664/unknown.png)
 
 A quick way to open command line is "Ctrl + r" and then type in "cmd".
 
