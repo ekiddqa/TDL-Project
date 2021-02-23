@@ -26,7 +26,13 @@ public class TaskListService {
 	private TaskListDTO mapToDTO(TaskList taskList) {
 		return this.mapper.map(taskList, TaskListDTO.class);
 	}
+	
+	//DTOs to TaskList
+	private TaskList mapToTaskList(TaskListDTO taskListDTO) {
+		return this.mapper.map(taskListDTO, TaskList.class);
+	}
 
+	
 	@Autowired
 	public TaskListService(TaskListRepo repo, ModelMapper mapper) {
 		super();
@@ -54,7 +60,7 @@ public class TaskListService {
 	public TaskListDTO update(Long id, TaskListDTO taskListDTO) {
 		
 		TaskList toUpdate = this.repo.findById(id).orElseThrow(TaskListNotFoundException::new);	
-		toUpdate.setGroupName(taskListDTO.getGroupName());	
+		toUpdate.setGroupName(taskListDTO.getGroupName());
 		SpringBean.mergeNotNull(taskListDTO, toUpdate);
 		return this.mapToDTO(this.repo.save(toUpdate));
 		}
